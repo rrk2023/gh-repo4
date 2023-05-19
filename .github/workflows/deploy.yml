@@ -2,10 +2,17 @@ name: Deployment
 on:
   push:
     branches:
-      - main
+      - master
       - dev
+env:
+  MONGODB_DB_NAME: gha-demo
 jobs:
   test:
+    env:
+      MONGODB_CLUSTER_ADDRESS: cluster0.tphok80.mongodb.net
+      MONGODB_USERNAME: rashmee
+      MONGODB_PASSWORD: hqwudMEeDM121v8C
+      PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:XYZ
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         run: npm test
       - name: Output information
