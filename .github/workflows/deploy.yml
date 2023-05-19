@@ -30,11 +30,14 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo "..."
+        run: |
+          echo "Mongo DB username is : $MONGODB_USERNAME"
+          echo "Mongo DB password is : $MONGODB_PASSWORD"
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output information
         run: |        
-          echo "..."
+          echo "Username is ${{ env.MONGODB_USERNAME }}"
+          echo "DB name is $MONGODB_DB_NAME" 
